@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using MyToDoList.MVVM.Model;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -19,6 +20,20 @@ namespace MyToDoList
         public MainWindow()
         {
             InitializeComponent();
+            AfterInitialize();
+        }
+
+        private void AfterInitialize()
+        {
+            AddTask.PreviewMouseLeftButtonDown += AddTask_PreviewMouseLeftButtonDown;
+        }
+
+        private void AddTask_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            TaskListModel newTaskList = new TaskListModel(textBox.Text);
+            TaskListView.Items.Add(newTaskList.HeaderTaskList);
         }
     }
 }

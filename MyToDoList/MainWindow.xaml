@@ -6,18 +6,24 @@
         xmlns:local="clr-namespace:MyToDoList"
         mc:Ignorable="d"
         Title="MyToDoList" Height="450" Width="800">
-    <Grid x:Name="GeneralGrid">
+    <Grid x:Name="GeneralGrid" Margin="5">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"/>
-            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="8*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.2*"/>
-            <ColumnDefinition Width="0.8*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="8*"/>
         </Grid.ColumnDefinitions>
-
-        <Grid x:Name="HeaderListGrid" Grid.Row="1">
-            <ListBox x:Name="HeaderList"/>
+        
+        <!--Левая группировка-->
+        <Grid x:Name="HeaderListGrid" Grid.Row="1" Margin="5">
+            <ListBox x:Name="HeaderList" 
+                     ItemTemplate="{StaticResource TaskListItemTemplate}">
+                
+            </ListBox>
+            
+            <!--Нижний блок кнопок-->
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="8*"/>
@@ -26,12 +32,34 @@
                 <Button x:Name="AddHeaderListItem" 
                         Content="+ Создать список" 
                         VerticalAlignment="Bottom" 
-                        HorizontalAlignment="Stretch"/>
+                        HorizontalAlignment="Stretch"/> 
                 <Button x:Name="AddGroupListItem" 
                         Content="ASD" Grid.Column="1"
                         VerticalAlignment="Bottom" 
                         HorizontalAlignment="Stretch"/>
             </Grid>
+        </Grid
+              >
+        <!--Центральная шапка-->
+        <Grid x:Name="TopBlock" Grid.Column="1" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1"/>
+        </Grid>
+        <!--Центральный список задач-->
+        <Grid x:Name="GeneralTaskView" Grid.Column="1" Grid.Row="1">
+            <ListBox x:Name="TaskListView">
+    
+            </ListBox>
+            <!--Нижний блок-->
+            <TextBox x:Name="AddTask" 
+                     Text="VVVVVVVVV"
+                     VerticalAlignment="Bottom" 
+                     Background="Azure"/>
         </Grid>
 
     </Grid>
