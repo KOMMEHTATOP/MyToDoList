@@ -7,6 +7,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="MVVM/ViewModel/TaskItemsViewModel.xaml"/>
+                <ResourceDictionary Source="MVVM/ViewModel/TextBoxViewModel.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

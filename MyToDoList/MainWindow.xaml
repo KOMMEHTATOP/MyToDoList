@@ -56,10 +56,12 @@
     
             </ListBox>
             <!--Нижний блок-->
-            <TextBox x:Name="AddTask" 
-                     Text="VVVVVVVVV"
-                     VerticalAlignment="Bottom" 
-                     Background="Azure"/>
+            <TextBox x:Name="AddTaskToList"
+                     Text="VVVVVV"
+                     Height="20"
+                     VerticalAlignment="Bottom"
+                     HorizontalAlignment="Stretch"
+                     Style="{StaticResource ModernTextBox}"/>
         </Grid>
 
     </Grid>

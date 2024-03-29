@@ -25,15 +25,14 @@ namespace MyToDoList
 
         private void AfterInitialize()
         {
-            AddTask.PreviewMouseLeftButtonDown += AddTask_PreviewMouseLeftButtonDown;
+            AddTaskToList.PreviewMouseLeftButtonDown += AddTask_PreviewMouseLeftButtonDown;
         }
 
         private void AddTask_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             TextBox textBox = sender as TextBox;
-
-            TaskListModel newTaskList = new TaskListModel(textBox.Text);
-            TaskListView.Items.Add(newTaskList.HeaderTaskList);
+            string taskListHeader = textBox.Text;
+            TaskListView.Items.Add(taskListHeader);
         }
     }
 }
