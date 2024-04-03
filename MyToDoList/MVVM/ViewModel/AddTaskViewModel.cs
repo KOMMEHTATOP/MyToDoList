@@ -46,6 +46,7 @@ namespace MyToDoList.MVVM.ViewModel
             ListHeaderViewModel = TaskListModel.GetListHeader();
             _mainWindow.ListName.Text = ListHeaderViewModel;
             _mainWindow.HeaderList.Items.Add(ListHeaderViewModel);
+            _mainWindow.TaskListView.Items.Add(newTaskViewModel.TaskHeader);
         }
     }
 }

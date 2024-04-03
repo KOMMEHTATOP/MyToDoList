@@ -18,7 +18,10 @@
 
         <!--Левая группировка-->
         <Grid x:Name="HeaderListGrid" Grid.Row="1" Margin="5">
-            <ListBox x:Name="HeaderList"></ListBox>
+            <ListBox x:Name="HeaderList">
+                <ListBoxItem x:Name="Favorite" Content="Избранное" FontStyle="Oblique" IsSelected="True"/>
+                <ListBoxItem x:Name="Warning" Content="Важно" FontStyle="Oblique"/>
+            </ListBox>
 
             <!--Нижний блок кнопок-->
             <Grid>
