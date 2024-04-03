@@ -1,4 +1,5 @@
 ﻿using MyToDoList.MVVM.Model;
+using MyToDoList.MVVM.ViewModel;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,27 +13,28 @@ using System.Windows.Shapes;
 
 namespace MyToDoList
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        AddTaskViewModel addTaskViewModel;
         public MainWindow()
         {
             InitializeComponent();
-            AfterInitialize();
+            Loading();
         }
 
-        private void AfterInitialize()
+        public void Loading()
         {
-            AddTaskToList.PreviewMouseLeftButtonDown += AddTask_PreviewMouseLeftButtonDown;
+            TaskListModel taskListModel = new TaskListModel();
+            addTaskViewModel = new AddTaskViewModel(this, taskListModel);
+            AddTaskButton.Click += AddTaskButton_Click;
         }
 
-        private void AddTask_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+
+        public void AddTaskButton_Click(object sender, RoutedEventArgs e)
         {
-            TextBox textBox = sender as TextBox;
-            string taskListHeader = textBox.Text;
-            TaskListView.Items.Add(taskListHeader);
+            string a = InputTaskHeader.Text;
+            addTaskViewModel.AddTaskToList(a);
         }
+
     }
 }

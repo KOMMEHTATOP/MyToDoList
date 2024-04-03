@@ -15,14 +15,11 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="8*"/>
         </Grid.ColumnDefinitions>
-        
+
         <!--Левая группировка-->
         <Grid x:Name="HeaderListGrid" Grid.Row="1" Margin="5">
-            <ListBox x:Name="HeaderList" 
-                     ItemTemplate="{StaticResource TaskListItemTemplate}">
-                
-            </ListBox>
-            
+            <ListBox x:Name="HeaderList"></ListBox>
+
             <!--Нижний блок кнопок-->
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -32,7 +29,7 @@
                 <Button x:Name="AddHeaderListItem" 
                         Content="+ Создать список" 
                         VerticalAlignment="Bottom" 
-                        HorizontalAlignment="Stretch"/> 
+                        HorizontalAlignment="Stretch"/>
                 <Button x:Name="AddGroupListItem" 
                         Content="ASD" Grid.Column="1"
                         VerticalAlignment="Bottom" 
@@ -48,20 +45,31 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="1"/>
+            <TextBlock x:Name="ListName" Grid.Column="1"/>
         </Grid>
         <!--Центральный список задач-->
         <Grid x:Name="GeneralTaskView" Grid.Column="1" Grid.Row="1">
-            <ListBox x:Name="TaskListView">
-    
-            </ListBox>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="95*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="95*"/>
+            </Grid.ColumnDefinitions>
+            <ListBox x:Name="TaskListView"
+                     Grid.ColumnSpan="2"/>
             <!--Нижний блок-->
-            <TextBox x:Name="AddTaskToList"
-                     Text="VVVVVV"
-                     Height="20"
+            <!--Style="{StaticResource ModernTextBox}"-->
+            <TextBox x:Name="InputTaskHeader"
+                     Grid.Column="1"
+                     Grid.Row="1"
                      VerticalAlignment="Bottom"
                      HorizontalAlignment="Stretch"
-                     Style="{StaticResource ModernTextBox}"/>
+                     />
+            <Button x:Name="AddTaskButton"
+                    Grid.Row="1"
+                    Content="+"/>
         </Grid>
 
     </Grid>
