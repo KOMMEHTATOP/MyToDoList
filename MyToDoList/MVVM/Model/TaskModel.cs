@@ -16,7 +16,7 @@ namespace MyToDoList.MVVM.Model
         public string? TaskDescription { get; set; }
         public DateTime? DateTime { get; set; }
         public bool Favorite { get; set; } = false;
-        public TaskListModel CurrentList;
+        public GroupDictionaryTaskModel CurrentList;
 
         public TaskModel(string taskHeader)
         {

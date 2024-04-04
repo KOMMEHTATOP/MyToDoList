@@ -15,7 +15,7 @@ namespace MyToDoList
 {
     public partial class MainWindow : Window
     {
-        AddTaskViewModel addTaskViewModel;
+        AddGroupTaskViewModel addGroupViewModel;
         public MainWindow()
         {
             InitializeComponent();
@@ -24,17 +24,21 @@ namespace MyToDoList
 
         public void Loading()
         {
-            TaskListModel taskListModel = new TaskListModel();
-            addTaskViewModel = new AddTaskViewModel(this, taskListModel);
+            GroupDictionaryTaskModel taskListModel = new GroupDictionaryTaskModel();
+            addGroupViewModel = new AddGroupTaskViewModel(this, taskListModel);
             AddTaskButton.Click += AddTaskButton_Click;
+            AddGroupHeaderItem.Click += AddGroupHeaderItem_Click;
         }
 
+        private void AddGroupHeaderItem_Click(object sender, RoutedEventArgs e)
+        {
+            
+            addGroupViewModel.AddGroupToDictionary();
+        }
 
         public void AddTaskButton_Click(object sender, RoutedEventArgs e)
         {
             string a = InputTaskHeader.Text;
-            addTaskViewModel.AddTaskToList(a);
         }
-
     }
 }

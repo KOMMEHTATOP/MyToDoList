@@ -9,7 +9,7 @@ namespace MyToDoList.MVVM.Model
     internal class GroupTaskListModel
     {
         public string HearedGroup { get; set; }
-        public List<TaskListModel> taskListModels = new List<TaskListModel>();
+        public List<GroupDictionaryTaskModel> taskListModels = new List<GroupDictionaryTaskModel>();
         public int CountList = 0;
     }
 }

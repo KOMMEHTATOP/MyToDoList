@@ -9,7 +9,7 @@ namespace MyToDoList.MVVM.Model
 {
     public class ToDoListModel
     {
-        public TaskListModel TaskListModel;
+        public GroupDictionaryTaskModel TaskListModel;
 
         public string TaskHeaderModel { get; set; }
     }

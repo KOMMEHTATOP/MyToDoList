@@ -17,19 +17,19 @@
         </Grid.ColumnDefinitions>
 
         <!--Левая группировка-->
-        <Grid x:Name="HeaderListGrid" Grid.Row="1" Margin="5">
-            <ListBox x:Name="HeaderList">
+        <Grid x:Name="GroupListHeaderGrid" Grid.Row="1" Margin="5">
+            <ListBox x:Name="GroupDictionaryHeader">
                 <ListBoxItem x:Name="Favorite" Content="Избранное" FontStyle="Oblique" IsSelected="True"/>
                 <ListBoxItem x:Name="Warning" Content="Важно" FontStyle="Oblique"/>
             </ListBox>
 
-            <!--Нижний блок кнопок-->
+            <!--Нижний блок кнопок левой группировки-->
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="8*"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="AddHeaderListItem" 
+                <Button x:Name="AddGroupHeaderItem" 
                         Content="+ Создать список" 
                         VerticalAlignment="Bottom" 
                         HorizontalAlignment="Stretch"/>
