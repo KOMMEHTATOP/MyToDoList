@@ -1,37 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
+﻿
+using MyToDoList.MVVM.View;
+using System.ComponentModel;
 
 namespace MyToDoList.MVVM.Model
 {
-    public delegate void ChangeTaskHeader(string text);
-    public class TaskModel
+    public class TaskModel :INotifyPropertyChanged
     {
-        public string TaskHeader { get; set; }
-        public string? TaskDescription { get; set; }
-        public DateTime? DateTime { get; set; }
-        public bool Favorite { get; set; } = false;
-        public GroupDictionaryTaskModel CurrentList;
+        private string _taskHeader = "Новый заголовок задачи";
+        private string _taskDescription = "Описание задачи";
 
-        public TaskModel(string taskHeader)
+        private CollectionModel _collectionModel;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        public TaskModel(string header, CollectionModel collectionModel)
         {
-            TaskHeader = taskHeader;
+            TaskHeader = header;
+            _collectionModel = collectionModel;
         }
 
-        public event ChangeTaskHeader ChangeTaskHeader;
-
-        public void GetTaskHeader(string newHeader)
+        public string TaskHeader
         {
-            TaskHeader = newHeader;
-            ChangeTaskHeader?.Invoke(newHeader);
+            get { return _taskHeader; }
+            set
+            {
+                if (_taskHeader!=value)
+                {
+                    _taskHeader = value;
+                    OnPropertyChanged(nameof(TaskHeader));
+                }
+            }
         }
 
+        public string TaskDescription
+        {
+            get { return _taskDescription; }
+            set
+            {
+                if (_taskDescription!=value)
+                {
+                    _taskDescription = value;
+                    OnPropertyChanged(TaskDescription);
+                }
+            }
+        }
 
-
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
