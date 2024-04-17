@@ -6,8 +6,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="MVVM/View/Themes/TaskItemsView.xaml"/>
-                <ResourceDictionary Source="MVVM/View/Themes/TextBoxView.xaml"/>
+                <ResourceDictionary Source="/MVVM/View/Themes/TaskTemplate.xaml"/>
+                <ResourceDictionary Source="/MVVM/View/Themes/CollectionTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

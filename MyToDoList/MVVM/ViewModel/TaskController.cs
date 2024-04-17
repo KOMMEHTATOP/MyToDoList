@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace MyToDoList.MVVM.ViewModel
 {
@@ -13,13 +14,18 @@ namespace MyToDoList.MVVM.ViewModel
     {
         MainWindow _mainWindow;
         CollectionController _collectionController;
-
         public string HeaderTaskController { get; set; }
 
         public TaskController(MainWindow mainWindow, CollectionController collectionController)
         {
             _mainWindow = mainWindow;
             _collectionController = collectionController;
+            _mainWindow.AddTaskButton.Click += AddTaskButton_Click;
+            
+        }
+
+        private void AddTaskButton_Click(object sender, RoutedEventArgs e)
+        {
             AddTask();
         }
 
@@ -28,16 +34,16 @@ namespace MyToDoList.MVVM.ViewModel
             if (_mainWindow.HeaderCollection.SelectedItem != null)
             {
                 CollectionModel selectedCollection = _mainWindow.HeaderCollection.SelectedItem as CollectionModel;
-                if (selectedCollection!=null)
+                if (selectedCollection != null)
                 {
                     string taskHeader = _mainWindow.InputTaskHeader.Text;
-                    if (string.IsNullOrEmpty(taskHeader))
+                    if (!string.IsNullOrEmpty(taskHeader))
                     {
                         TaskModel newTask = new TaskModel(taskHeader, selectedCollection);
-                        selectedCollection.bDCollectionModel.Add(newTask);
-                        _mainWindow.TaskListView.Items.Add(newTask);
+                        selectedCollection.BDCollectionModel.Add(newTask);
                     }
                 }
+                
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿
 
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 
@@ -7,19 +8,19 @@ namespace MyToDoList.MVVM.Model
 {
     public class CollectionModel: INotifyPropertyChanged
     {
-        
-        private List<TaskModel> _bDcollectionModel = new List<TaskModel>();
+
+        private ObservableCollection<TaskModel> _bDCollectionModel = new ObservableCollection<TaskModel>();
         private string _headerCollection = "Название листа";
 
-        public List<TaskModel> bDCollectionModel
+        public ObservableCollection<TaskModel> BDCollectionModel
         {
-            get { return _bDcollectionModel; }
+            get { return _bDCollectionModel; }
             set
             {
-                if (_bDcollectionModel != value)
+                if (_bDCollectionModel != value)
                 {
-                    _bDcollectionModel = value;
-                    OnPropertyChanged(nameof(bDCollectionModel));
+                    _bDCollectionModel = value;
+                    OnPropertyChanged(nameof(BDCollectionModel));
                 }
             }
         }
@@ -40,11 +41,8 @@ namespace MyToDoList.MVVM.Model
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            MessageBox.Show("asdf");
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
-
-
     }
 }

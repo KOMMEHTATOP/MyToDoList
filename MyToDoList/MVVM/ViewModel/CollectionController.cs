@@ -1,22 +1,24 @@
 ﻿
 using MyToDoList.MVVM.Model;
+using MyToDoList.MVVM.ViewModel;
 using System.ComponentModel;
 using System.Windows;
 
 namespace MyToDoList.MVVM.View
 {
-    public class CollectionController :INotifyPropertyChanged
+    public class CollectionController : INotifyPropertyChanged
     {
         private MainWindow _mainWindow;
         private List<TaskModel> _dBCollection;
         private string _headerListCollection;
+        private CollectionModel _collectionModel = new CollectionModel();
 
         public List<TaskModel> DBCollection
         {
             get { return _dBCollection; }
-            set 
+            set
             {
-                if (_dBCollection!=value)
+                if (_dBCollection != value)
                 {
                     _dBCollection = value;
                     OnPropertyChanged(nameof(DBCollection));
@@ -29,7 +31,7 @@ namespace MyToDoList.MVVM.View
             get { return _headerListCollection; }
             set
             {
-                if (_headerListCollection!=value)
+                if (_headerListCollection != value)
                 {
                     _headerListCollection = value;
                     OnPropertyChanged(nameof(HeaderListCollection));
@@ -43,19 +45,20 @@ namespace MyToDoList.MVVM.View
         public CollectionController(MainWindow mainWindow)
         {
             _mainWindow = mainWindow;
+            _collectionModel.PropertyChanged += _collectionModel_PropertyChanged;
             AddListTasks();
-            
+
+        }
+
+        private void _collectionModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            MessageBox.Show($"{e}");
         }
 
         private void AddListTasks()
         {
-            CollectionModel newListCollection = new CollectionModel();
-            _mainWindow.HeaderCollection.Items.Add(newListCollection.HeaderCollection);
-            newListCollection.PropertyChanged += NewListCollection_PropertyChanged;
-        }
-
-        private void NewListCollection_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
+            _collectionModel = new CollectionModel();
+            
         }
 
         private void OnPropertyChanged(string propertyName)

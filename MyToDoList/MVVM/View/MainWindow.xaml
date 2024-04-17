@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MyToDoList"
+        xmlns:local="clr-namespace:MyToDoList.MVVM.Model"
         mc:Ignorable="d"
         Title="MyToDoList" Height="450" Width="800">
     <Grid x:Name="GeneralGrid" Margin="5">
@@ -19,7 +19,11 @@
         <!--Левая группировка-->
         <Grid x:Name="GroupHeaderGrid" Grid.Row="1" Margin="5">
             <ListBox x:Name="HeaderCollection">
-              
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding HeaderCollection}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
             </ListBox>
 
             <!--Нижний блок кнопок левой группировки-->
@@ -59,10 +63,11 @@
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="95*"/>
             </Grid.ColumnDefinitions>
-            <ListBox x:Name="TaskListView"
-                     Grid.ColumnSpan="2"/>
+            <ListBox x:Name="TaskListView" 
+                 Grid.ColumnSpan="2"  
+                 ItemsSource="{Binding SelectedItem.DBCollectionModel, ElementName=HeaderCollection}" 
+                 DisplayMemberPath="TaskHeader"/>   
             <!--Нижний блок-->
-            <!--Style="{StaticResource ModernTextBox}"-->
             <TextBox x:Name="InputTaskHeader"
                      Grid.Column="1"
                      Grid.Row="1"
