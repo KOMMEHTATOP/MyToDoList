@@ -67,9 +67,7 @@
                 <ColumnDefinition Width="95*"/>
             </Grid.ColumnDefinitions>
             <ListBox x:Name="TaskListView" 
-                 Grid.ColumnSpan="2"  
-                 ItemsSource="{Binding SelectedItem.DBCollectionModel, ElementName=HeaderCollection}" 
-                 DisplayMemberPath="TaskHeader"/>   
+                 Grid.ColumnSpan="2"/>   
             <!--Нижний блок-->
             <TextBox x:Name="InputTaskHeader"
                      Grid.Column="1"

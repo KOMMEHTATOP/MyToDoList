@@ -10,11 +10,31 @@ using System.Windows;
 
 namespace MyToDoList.MVVM.ViewModel
 {
-    public class TaskController
+    public class TaskController : INotifyPropertyChanged
     {
         MainWindow _mainWindow;
 
-        public string HeaderTaskController { get; set; }
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private string _taskHeaderContoller;
+
+        public string TaskHeaderController
+        {
+            get { return _taskHeaderContoller; }
+            set
+            {
+                if (_taskHeaderContoller != value)
+                {
+                    _taskHeaderContoller = value;
+                    OnPropertyChanged(nameof(TaskHeaderController));
+                }
+            }
+        }
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public TaskController(MainWindow mainWindow)
         {
@@ -25,23 +45,11 @@ namespace MyToDoList.MVVM.ViewModel
 
         private void AddTask()
         {
-            var se = _mainWindow.HeaderCollection.SelectedItem;
-            MessageBox.Show($"{se.GetType().Name}");
-            CollectionController? selectedCollection = _mainWindow.HeaderCollection.SelectedItem as CollectionController;
-            string taskHeader = _mainWindow.InputTaskHeader.Text;
-            TaskModel newTask = new TaskModel(taskHeader);
-            selectedCollection.DCollectionController.Add(newTask);
-
-
-/*            if (_mainWindow.HeaderCollection.SelectedItem != null)
+            if (!string.IsNullOrEmpty(_mainWindow.InputTaskHeader.Text))
             {
-                if (selectedCollection != null)
-                {
-                    if (!string.IsNullOrEmpty(taskHeader))
-                    {
-                    }
-                }
+                TaskModel newTask = new TaskModel(_mainWindow.InputTaskHeader.Text);
+                _mainWindow.TaskListView.Items.Add(newTask.TaskHeader);
             }
-*/        }
+        }
     }
 }
