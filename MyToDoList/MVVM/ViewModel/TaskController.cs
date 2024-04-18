@@ -25,9 +25,9 @@ namespace MyToDoList.MVVM.ViewModel
             {
                 if (_taskHeaderContoller != value)
                 {
-                    _taskHeaderContoller = value;
+                    _taskHeaderContoller = value; 
                     OnPropertyChanged(nameof(TaskHeaderController));
-                }
+                }  
             }
         }
 
