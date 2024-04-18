@@ -13,38 +13,35 @@ namespace MyToDoList.MVVM.ViewModel
     public class TaskController
     {
         MainWindow _mainWindow;
-        CollectionController _collectionController;
+
         public string HeaderTaskController { get; set; }
 
-        public TaskController(MainWindow mainWindow, CollectionController collectionController)
+        public TaskController(MainWindow mainWindow)
         {
             _mainWindow = mainWindow;
-            _collectionController = collectionController;
-            _mainWindow.AddTaskButton.Click += AddTaskButton_Click;
-            
-        }
-
-        private void AddTaskButton_Click(object sender, RoutedEventArgs e)
-        {
             AddTask();
         }
 
+
         private void AddTask()
         {
-            if (_mainWindow.HeaderCollection.SelectedItem != null)
+            var se = _mainWindow.HeaderCollection.SelectedItem;
+            MessageBox.Show($"{se.GetType().Name}");
+            CollectionController? selectedCollection = _mainWindow.HeaderCollection.SelectedItem as CollectionController;
+            string taskHeader = _mainWindow.InputTaskHeader.Text;
+            TaskModel newTask = new TaskModel(taskHeader);
+            selectedCollection.DCollectionController.Add(newTask);
+
+
+/*            if (_mainWindow.HeaderCollection.SelectedItem != null)
             {
-                CollectionModel selectedCollection = _mainWindow.HeaderCollection.SelectedItem as CollectionModel;
                 if (selectedCollection != null)
                 {
-                    string taskHeader = _mainWindow.InputTaskHeader.Text;
                     if (!string.IsNullOrEmpty(taskHeader))
                     {
-                        TaskModel newTask = new TaskModel(taskHeader, selectedCollection);
-                        selectedCollection.BDCollectionModel.Add(newTask);
                     }
                 }
-                
             }
-        }
+*/        }
     }
 }

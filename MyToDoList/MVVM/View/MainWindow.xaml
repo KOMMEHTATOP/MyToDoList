@@ -21,9 +21,12 @@
             <ListBox x:Name="HeaderCollection">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding HeaderCollection}"/>
+                        <TextBlock Text="{Binding HeaderListCollection}"/>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
+                <ListBoxItem x:Name="Favorite">
+                    <TextBlock Text="Избранное" Selector.IsSelected="True"/>
+                </ListBoxItem>
             </ListBox>
 
             <!--Нижний блок кнопок левой группировки-->
