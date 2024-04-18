@@ -1,5 +1,6 @@
 ﻿
 
+using MyToDoList.MVVM.View;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
@@ -8,7 +9,7 @@ namespace MyToDoList.MVVM.Model
 {
     public class CollectionModel: INotifyPropertyChanged
     {
-
+        CollectionController _collectionController;
         private ObservableCollection<TaskModel> _bDCollectionModel = new ObservableCollection<TaskModel>();
         private string _headerCollection = "Название листа";
 
@@ -36,6 +37,18 @@ namespace MyToDoList.MVVM.Model
                     OnPropertyChanged(nameof(HeaderCollection));
                 }
             }
+        }
+
+
+        public CollectionModel(CollectionController collectionController)
+        {
+            _collectionController = collectionController;
+            _collectionController.PropertyChanged += _collectionController_PropertyChanged;
+        }
+
+        private void _collectionController_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            MessageBox.Show($"{e}");
         }
 
         private void OnPropertyChanged(string propertyName)

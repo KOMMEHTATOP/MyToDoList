@@ -10,40 +10,45 @@ using System.Windows;
 
 namespace MyToDoList.MVVM.ViewModel
 {
-    public class TaskController
+    public class TaskController : INotifyPropertyChanged
     {
         MainWindow _mainWindow;
-        CollectionController _collectionController;
-        public string HeaderTaskController { get; set; }
 
-        public TaskController(MainWindow mainWindow, CollectionController collectionController)
+        public event PropertyChangedEventHandler? PropertyChanged;
+
+        private string _taskHeaderContoller;
+
+        public string TaskHeaderController
         {
-            _mainWindow = mainWindow;
-            _collectionController = collectionController;
-            _mainWindow.AddTaskButton.Click += AddTaskButton_Click;
-            
+            get { return _taskHeaderContoller; }
+            set
+            {
+                if (_taskHeaderContoller != value)
+                {
+                    _taskHeaderContoller = value; 
+                    OnPropertyChanged(nameof(TaskHeaderController));
+                }  
+            }
         }
 
-        private void AddTaskButton_Click(object sender, RoutedEventArgs e)
+        private void OnPropertyChanged(string propertyName)
         {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public TaskController(MainWindow mainWindow)
+        {
+            _mainWindow = mainWindow;
             AddTask();
         }
 
+
         private void AddTask()
         {
-            if (_mainWindow.HeaderCollection.SelectedItem != null)
+            if (!string.IsNullOrEmpty(_mainWindow.InputTaskHeader.Text))
             {
-                CollectionModel selectedCollection = _mainWindow.HeaderCollection.SelectedItem as CollectionModel;
-                if (selectedCollection != null)
-                {
-                    string taskHeader = _mainWindow.InputTaskHeader.Text;
-                    if (!string.IsNullOrEmpty(taskHeader))
-                    {
-                        TaskModel newTask = new TaskModel(taskHeader, selectedCollection);
-                        selectedCollection.BDCollectionModel.Add(newTask);
-                    }
-                }
-                
+                TaskModel newTask = new TaskModel(_mainWindow.InputTaskHeader.Text);
+                _mainWindow.TaskListView.Items.Add(newTask.TaskHeader);
             }
         }
     }

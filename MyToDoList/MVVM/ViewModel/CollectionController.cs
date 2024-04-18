@@ -1,6 +1,7 @@
 ﻿
 using MyToDoList.MVVM.Model;
 using MyToDoList.MVVM.ViewModel;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Windows;
 
@@ -8,23 +9,10 @@ namespace MyToDoList.MVVM.View
 {
     public class CollectionController : INotifyPropertyChanged
     {
-        private MainWindow _mainWindow;
-        private List<TaskModel> _dBCollection;
+        MainWindow _mainWindow;
         private string _headerListCollection;
-        private CollectionModel _collectionModel = new CollectionModel();
-
-        public List<TaskModel> DBCollection
-        {
-            get { return _dBCollection; }
-            set
-            {
-                if (_dBCollection != value)
-                {
-                    _dBCollection = value;
-                    OnPropertyChanged(nameof(DBCollection));
-                }
-            }
-        }
+        private CollectionModel _collectionModel;
+        private ObservableCollection<TaskModel> _bDCollectionController = new ObservableCollection<TaskModel>();
 
         public string HeaderListCollection
         {
@@ -39,15 +27,27 @@ namespace MyToDoList.MVVM.View
             }
         }
 
+        public ObservableCollection<TaskModel> DCollectionController 
+        { 
+            get { return _bDCollectionController; } 
+            set
+            {
+                if (_bDCollectionController!=value)
+                {
+                    _bDCollectionController = value;
+                    OnPropertyChanged(nameof(DCollectionController));
+                }
+            }
+        }
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public CollectionController(MainWindow mainWindow)
         {
             _mainWindow = mainWindow;
+            _collectionModel = new CollectionModel(this);
             _collectionModel.PropertyChanged += _collectionModel_PropertyChanged;
             AddListTasks();
-
         }
 
         private void _collectionModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
@@ -57,8 +57,7 @@ namespace MyToDoList.MVVM.View
 
         private void AddListTasks()
         {
-            _collectionModel = new CollectionModel();
-            
+            _collectionModel = new CollectionModel(this);
         }
 
         private void OnPropertyChanged(string propertyName)

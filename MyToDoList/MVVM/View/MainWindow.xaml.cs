@@ -19,6 +19,7 @@ namespace MyToDoList.MVVM.View
         {
             AddGroupButton.Click += AddGroupButton_Click;
             AddCollectionButton.Click += AddCollectionButton_Click;
+            AddTaskButton.Click += AddTaskButton_Click;
         }
 
         private void AddGroupButton_Click(object sender, RoutedEventArgs e)
@@ -31,6 +32,10 @@ namespace MyToDoList.MVVM.View
             CollectionController = new CollectionController(this);
         }
 
+        private void AddTaskButton_Click(object sender, RoutedEventArgs e)
+        {
+            TaskController = new TaskController(this);
+        }
 
     }
 }
