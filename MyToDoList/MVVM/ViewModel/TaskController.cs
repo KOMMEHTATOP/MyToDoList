@@ -16,7 +16,7 @@ namespace MyToDoList.MVVM.ViewModel
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private string _taskHeaderContoller;
+        private string _taskHeaderContoller; 
 
         public string TaskHeaderController
         {
