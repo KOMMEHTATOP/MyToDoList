@@ -19,11 +19,6 @@
         <!--Левая группировка-->
         <Grid x:Name="GroupHeaderGrid" Grid.Row="1" Margin="5">
             <ListBox x:Name="HeaderCollection">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding HeaderListCollection}"/>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
                 <ListBoxItem x:Name="Favorite">
                     <TextBlock Text="Избранное" Selector.IsSelected="True"/>
                 </ListBoxItem>

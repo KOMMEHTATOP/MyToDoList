@@ -43,12 +43,6 @@ namespace MyToDoList.MVVM.Model
         public CollectionModel(CollectionController collectionController)
         {
             _collectionController = collectionController;
-            _collectionController.PropertyChanged += _collectionController_PropertyChanged;
-        }
-
-        private void _collectionController_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            MessageBox.Show($"{e}");
         }
 
         private void OnPropertyChanged(string propertyName)

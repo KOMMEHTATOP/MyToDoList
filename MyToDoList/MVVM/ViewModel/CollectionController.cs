@@ -45,19 +45,13 @@ namespace MyToDoList.MVVM.View
         public CollectionController(MainWindow mainWindow)
         {
             _mainWindow = mainWindow;
-            _collectionModel = new CollectionModel(this);
-            _collectionModel.PropertyChanged += _collectionModel_PropertyChanged;
             AddListTasks();
-        }
-
-        private void _collectionModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-            MessageBox.Show($"{e}");
         }
 
         private void AddListTasks()
         {
             _collectionModel = new CollectionModel(this);
+            _mainWindow.HeaderCollection.Items.Add(_collectionModel.HeaderCollection);
         }
 
         private void OnPropertyChanged(string propertyName)
