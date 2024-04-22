@@ -27,12 +27,12 @@ namespace MyToDoList.MVVM.View
             }
         }
 
-        public ObservableCollection<TaskModel> DCollectionController 
-        { 
-            get { return _bDCollectionController; } 
+        public ObservableCollection<TaskModel> DCollectionController
+        {
+            get { return _bDCollectionController; }
             set
             {
-                if (_bDCollectionController!=value)
+                if (_bDCollectionController != value)
                 {
                     _bDCollectionController = value;
                     OnPropertyChanged(nameof(DCollectionController));
@@ -45,6 +45,7 @@ namespace MyToDoList.MVVM.View
         public CollectionController(MainWindow mainWindow)
         {
             _mainWindow = mainWindow;
+            
             AddListTasks();
         }
 
@@ -53,6 +54,8 @@ namespace MyToDoList.MVVM.View
             _collectionModel = new CollectionModel(this);
             _mainWindow.HeaderCollection.Items.Add(_collectionModel.HeaderCollection);
         }
+
+       
 
         private void OnPropertyChanged(string propertyName)
         {

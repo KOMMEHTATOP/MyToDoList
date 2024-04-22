@@ -19,9 +19,6 @@
         <!--Левая группировка-->
         <Grid x:Name="GroupHeaderGrid" Grid.Row="1" Margin="5">
             <ListBox x:Name="HeaderCollection">
-                <ListBoxItem x:Name="Favorite">
-                    <TextBlock Text="Избранное" Selector.IsSelected="True"/>
-                </ListBoxItem>
             </ListBox>
 
             <!--Нижний блок кнопок левой группировки-->
@@ -62,7 +59,7 @@
                 <ColumnDefinition Width="95*"/>
             </Grid.ColumnDefinitions>
             <ListBox x:Name="TaskListView" 
-                 Grid.ColumnSpan="2"/>   
+                 Grid.ColumnSpan="2"/>
             <!--Нижний блок-->
             <TextBox x:Name="InputTaskHeader"
                      Grid.Column="1"

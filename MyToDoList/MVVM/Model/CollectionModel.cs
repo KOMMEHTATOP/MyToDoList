@@ -39,17 +39,17 @@ namespace MyToDoList.MVVM.Model
             }
         }
 
-
         public CollectionModel(CollectionController collectionController)
         {
             _collectionController = collectionController;
         }
 
+        public event PropertyChangedEventHandler? PropertyChanged;
+        
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public event PropertyChangedEventHandler? PropertyChanged;
     }
 }

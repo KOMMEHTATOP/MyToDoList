@@ -7,6 +7,7 @@ namespace MyToDoList.MVVM.Model
     public class TaskModel :INotifyPropertyChanged
     {
         private string _taskHeader;
+        private string _description = "";
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
@@ -24,6 +25,19 @@ namespace MyToDoList.MVVM.Model
                 {
                     _taskHeader = value;
                     OnPropertyChanged(nameof(TaskHeader));
+                }
+            }
+        }
+
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                if (_description!=value)
+                {
+                    _description = value;
+                    OnPropertyChanged(nameof(Description));
                 }
             }
         }

@@ -7,14 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MyToDoList.MVVM.ViewModel
 {
     public class TaskController : INotifyPropertyChanged
     {
-        MainWindow _mainWindow;
-
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        MainWindow _mainWindow;
+        TaskModel newTask;
+        TaskDescriptionView _taskDescriptionView;
 
         private string _taskHeaderContoller;
 
@@ -25,9 +28,9 @@ namespace MyToDoList.MVVM.ViewModel
             {
                 if (_taskHeaderContoller != value)
                 {
-                    _taskHeaderContoller = value; 
+                    _taskHeaderContoller = value;
                     OnPropertyChanged(nameof(TaskHeaderController));
-                }  
+                }
             }
         }
 
@@ -40,15 +43,46 @@ namespace MyToDoList.MVVM.ViewModel
         {
             _mainWindow = mainWindow;
             AddTask();
+            _mainWindow.TaskListView.SelectionChanged += TaskListView_SelectionChanged;
+        }
+
+        private void TaskListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            IsSelectedTask();
+        }
+
+        public bool IsSelectedCollectionItem(MainWindow mainWindow)
+        {
+            object selectedItem = mainWindow.HeaderCollection.SelectedItem;
+            if (selectedItem != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void IsSelectedTask()
+        {
+            object selectedTask = _mainWindow.TaskListView.SelectedItem;
+            if (selectedTask != null)
+            {
+                _taskDescriptionView = new TaskDescriptionView();
+                _taskDescriptionView.TaskHeader.Text = newTask.TaskHeader;
+                _taskDescriptionView.TaskDescription.Text = newTask.Description;
+                _taskDescriptionView.ShowDialog();
+            }
         }
 
 
         private void AddTask()
         {
-            if (!string.IsNullOrEmpty(_mainWindow.InputTaskHeader.Text))
+            if (IsSelectedCollectionItem(_mainWindow))
             {
-                TaskModel newTask = new TaskModel(_mainWindow.InputTaskHeader.Text);
-                _mainWindow.TaskListView.Items.Add(newTask.TaskHeader);
+                if (!string.IsNullOrEmpty(_mainWindow.InputTaskHeader.Text))
+                {
+                    newTask = new TaskModel(_mainWindow.InputTaskHeader.Text);
+                    _mainWindow.TaskListView.Items.Add(newTask.TaskHeader);
+                }
             }
         }
     }

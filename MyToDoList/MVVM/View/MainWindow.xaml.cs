@@ -1,6 +1,8 @@
 ﻿using MyToDoList.MVVM.View;
 using MyToDoList.MVVM.ViewModel;
 using System.Windows;
+using System.Windows.Controls.Primitives;
+using System.Windows.Controls;
 
 
 namespace MyToDoList.MVVM.View
@@ -9,13 +11,15 @@ namespace MyToDoList.MVVM.View
     {
         public CollectionController CollectionController;
         public TaskController TaskController;
+
         public MainWindow()
         {
             InitializeComponent();
             Loading();
-        }
 
-        public void Loading()
+    }
+
+    public void Loading()
         {
             AddGroupButton.Click += AddGroupButton_Click;
             AddCollectionButton.Click += AddCollectionButton_Click;
