@@ -17,9 +17,9 @@ namespace MyToDoList.MVVM.View
             InitializeComponent();
             Loading();
 
-    }
+        }
 
-    public void Loading()
+        public void Loading()
         {
             AddGroupButton.Click += AddGroupButton_Click;
             AddCollectionButton.Click += AddCollectionButton_Click;

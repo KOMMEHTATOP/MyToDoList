@@ -43,12 +43,14 @@ namespace MyToDoList.MVVM.ViewModel
         {
             _mainWindow = mainWindow;
             AddTask();
+            
             _mainWindow.TaskListView.SelectionChanged += TaskListView_SelectionChanged;
         }
 
         private void TaskListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             IsSelectedTask();
+            AddTaskDescription();
         }
 
         public bool IsSelectedCollectionItem(MainWindow mainWindow)
@@ -82,6 +84,22 @@ namespace MyToDoList.MVVM.ViewModel
                 {
                     newTask = new TaskModel(_mainWindow.InputTaskHeader.Text);
                     _mainWindow.TaskListView.Items.Add(newTask.TaskHeader);
+                }
+            }
+        }
+
+        public void AddTaskDescription()
+        {
+            if (IsSelectedCollectionItem(_mainWindow))
+            {
+                if (!string.IsNullOrEmpty(_taskDescriptionView.TaskDescription.Text))
+                {
+                    newTask.Description = _taskDescriptionView.TaskDescription.Text;
+                }
+                else
+                {
+                    newTask.Description = _taskDescriptionView.TaskDescription.Text;
+                    _taskDescriptionView.TaskDescription.Text = newTask.Description;
                 }
             }
         }
