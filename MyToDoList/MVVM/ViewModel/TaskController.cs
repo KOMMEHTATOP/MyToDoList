@@ -16,7 +16,7 @@ namespace MyToDoList.MVVM.ViewModel
         public event PropertyChangedEventHandler? PropertyChanged;
 
         MainWindow _mainWindow;
-        TaskModel newTask;
+        TaskModel _newTask;
         TaskDescriptionView _taskDescriptionView;
 
         private string _taskHeaderContoller;
@@ -43,13 +43,13 @@ namespace MyToDoList.MVVM.ViewModel
         {
             _mainWindow = mainWindow;
             AddTask();
-            
+
             _mainWindow.TaskListView.SelectionChanged += TaskListView_SelectionChanged;
         }
 
         private void TaskListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            IsSelectedTask();
+            ShowFullDescriptionTask();
             AddTaskDescription();
         }
 
@@ -63,14 +63,14 @@ namespace MyToDoList.MVVM.ViewModel
             return false;
         }
 
-        public void IsSelectedTask()
+        public void ShowFullDescriptionTask()
         {
             object selectedTask = _mainWindow.TaskListView.SelectedItem;
             if (selectedTask != null)
             {
                 _taskDescriptionView = new TaskDescriptionView();
-                _taskDescriptionView.TaskHeader.Text = newTask.TaskHeader;
-                _taskDescriptionView.TaskDescription.Text = newTask.Description;
+                _taskDescriptionView.TaskHeader.Text = _newTask.TaskHeader;
+                _taskDescriptionView.TaskDescription.Text = _newTask.Description;
                 _taskDescriptionView.ShowDialog();
             }
         }
@@ -82,8 +82,8 @@ namespace MyToDoList.MVVM.ViewModel
             {
                 if (!string.IsNullOrEmpty(_mainWindow.InputTaskHeader.Text))
                 {
-                    newTask = new TaskModel(_mainWindow.InputTaskHeader.Text);
-                    _mainWindow.TaskListView.Items.Add(newTask.TaskHeader);
+                    _newTask = new TaskModel(_mainWindow.InputTaskHeader.Text);
+                    _mainWindow.TaskListView.Items.Add(_newTask.TaskHeader);
                 }
             }
         }
@@ -92,15 +92,10 @@ namespace MyToDoList.MVVM.ViewModel
         {
             if (IsSelectedCollectionItem(_mainWindow))
             {
-                if (!string.IsNullOrEmpty(_taskDescriptionView.TaskDescription.Text))
-                {
-                    newTask.Description = _taskDescriptionView.TaskDescription.Text;
-                }
-                else
-                {
-                    newTask.Description = _taskDescriptionView.TaskDescription.Text;
-                    _taskDescriptionView.TaskDescription.Text = newTask.Description;
-                }
+
+                _newTask.Description = _taskDescriptionView.TaskDescription.Text;
+
+
             }
         }
     }
