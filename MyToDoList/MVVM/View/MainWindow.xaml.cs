@@ -3,6 +3,7 @@ using MyToDoList.MVVM.ViewModel;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Controls;
+using MyToDoList.MVVM.Model;
 
 
 namespace MyToDoList.MVVM.View
@@ -11,6 +12,7 @@ namespace MyToDoList.MVVM.View
     {
         public CollectionController CollectionController;
         public TaskController TaskController;
+        public List<TaskModel> ListTaskController = new List<TaskModel>();
 
         public MainWindow()
         {
@@ -24,6 +26,14 @@ namespace MyToDoList.MVVM.View
             AddGroupButton.Click += AddGroupButton_Click;
             AddCollectionButton.Click += AddCollectionButton_Click;
             AddTaskButton.Click += AddTaskButton_Click;
+
+            TaskListView.SelectionChanged += TaskListView_SelectionChanged;
+        }
+
+        private void TaskListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            int selectionIndex = TaskListView.SelectedIndex;
+            TaskController.ShowFullDescription(selectionIndex);
         }
 
         private void AddGroupButton_Click(object sender, RoutedEventArgs e)
@@ -40,6 +50,5 @@ namespace MyToDoList.MVVM.View
         {
             TaskController = new TaskController(this);
         }
-
     }
 }

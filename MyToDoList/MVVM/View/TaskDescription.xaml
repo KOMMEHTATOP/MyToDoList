@@ -11,7 +11,7 @@
                     Background="AntiqueWhite"
                     Margin="3">
             <TextBlock x:Name="TaskHeader" Text="" FontSize="30"/>
-            <TextBox x:Name="TaskDescription" Text=""/>
+            <TextBox x:Name="TaskDescription" Text="" Height="140"/>
             
         </StackPanel>
     </Grid>
