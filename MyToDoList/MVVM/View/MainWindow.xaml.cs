@@ -12,7 +12,7 @@ namespace MyToDoList.MVVM.View
     {
         public CollectionController CollectionController;
         public TaskController TaskController;
-        public List<TaskModel> ListTaskController = new List<TaskModel>();
+        public List<TaskModel> ListTaskModels = new List<TaskModel>();
 
         public MainWindow()
         {

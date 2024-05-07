@@ -44,13 +44,8 @@ namespace MyToDoList.MVVM.ViewModel
             if (!string.IsNullOrEmpty(_mainWindow.InputTaskHeader.Text))
             {
                 _newTask = new TaskModel(_mainWindow.InputTaskHeader.Text);
-                _mainWindow.ListTaskController.Add(_newTask);
-                _mainWindow.TaskListView.Items.Clear();
-
-                foreach (var item in _mainWindow.ListTaskController)
-                {
-                    _mainWindow.TaskListView.Items.Add(item.TaskHeader);
-                }
+                _mainWindow.ListTaskModels.Add(_newTask);
+                _mainWindow.TaskListView.Items.Add(_newTask.TaskHeader);
             }
         }
 
@@ -58,8 +53,8 @@ namespace MyToDoList.MVVM.ViewModel
         {
             _taskDescriptionView = new TaskDescriptionView();
             currentIndex = index;
-            _taskDescriptionView.TaskHeader.Text = _mainWindow.ListTaskController[index].TaskHeader;
-            _taskDescriptionView.TaskDescription.Text = _mainWindow.ListTaskController[index].Description;
+            _taskDescriptionView.TaskHeader.Text = _mainWindow.ListTaskModels[index].TaskHeader;
+            _taskDescriptionView.TaskDescription.Text = _mainWindow.ListTaskModels[index].Description;
             _taskDescriptionView.TaskDescription.TextChanged += TaskDescription_TextChanged;
             _taskDescriptionView.Show();
 
@@ -67,7 +62,7 @@ namespace MyToDoList.MVVM.ViewModel
 
         private void TaskDescription_TextChanged(object sender, TextChangedEventArgs e)
         {
-            _mainWindow.ListTaskController[currentIndex].Description = _taskDescriptionView.TaskDescription.Text;
+            _mainWindow.ListTaskModels[currentIndex].Description = _taskDescriptionView.TaskDescription.Text;
         }
     }
 }
