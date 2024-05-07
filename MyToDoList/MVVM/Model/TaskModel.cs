@@ -9,6 +9,7 @@ namespace MyToDoList.MVVM.Model
         private string _taskHeader;
         private string _description = "";
 
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public TaskModel(string header)

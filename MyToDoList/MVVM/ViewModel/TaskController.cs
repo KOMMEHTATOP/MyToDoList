@@ -11,13 +11,13 @@ using System.Windows.Controls;
 
 namespace MyToDoList.MVVM.ViewModel
 {
-    public class TaskController : INotifyPropertyChanged
+    public class TaskController
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         MainWindow _mainWindow;
-        TaskModel newTask;
+        TaskModel _newTask;
         TaskDescriptionView _taskDescriptionView;
+        int currentIndex;
 
         private string _taskHeaderContoller;
 
@@ -29,61 +29,45 @@ namespace MyToDoList.MVVM.ViewModel
                 if (_taskHeaderContoller != value)
                 {
                     _taskHeaderContoller = value;
-                    OnPropertyChanged(nameof(TaskHeaderController));
                 }
             }
-        }
-
-        private void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         public TaskController(MainWindow mainWindow)
         {
             _mainWindow = mainWindow;
             AddTask();
-            _mainWindow.TaskListView.SelectionChanged += TaskListView_SelectionChanged;
         }
-
-        private void TaskListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            IsSelectedTask();
-        }
-
-        public bool IsSelectedCollectionItem(MainWindow mainWindow)
-        {
-            object selectedItem = mainWindow.HeaderCollection.SelectedItem;
-            if (selectedItem != null)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public void IsSelectedTask()
-        {
-            object selectedTask = _mainWindow.TaskListView.SelectedItem;
-            if (selectedTask != null)
-            {
-                _taskDescriptionView = new TaskDescriptionView();
-                _taskDescriptionView.TaskHeader.Text = newTask.TaskHeader;
-                _taskDescriptionView.TaskDescription.Text = newTask.Description;
-                _taskDescriptionView.ShowDialog();
-            }
-        }
-
 
         private void AddTask()
         {
-            if (IsSelectedCollectionItem(_mainWindow))
+            if (!string.IsNullOrEmpty(_mainWindow.InputTaskHeader.Text))
             {
-                if (!string.IsNullOrEmpty(_mainWindow.InputTaskHeader.Text))
+                _newTask = new TaskModel(_mainWindow.InputTaskHeader.Text);
+                _mainWindow.ListTaskController.Add(_newTask);
+                _mainWindow.TaskListView.Items.Clear();
+
+                foreach (var item in _mainWindow.ListTaskController)
                 {
-                    newTask = new TaskModel(_mainWindow.InputTaskHeader.Text);
-                    _mainWindow.TaskListView.Items.Add(newTask.TaskHeader);
+                    _mainWindow.TaskListView.Items.Add(item.TaskHeader);
                 }
             }
+        }
+
+        public void ShowFullDescription(int index)
+        {
+            _taskDescriptionView = new TaskDescriptionView();
+            currentIndex = index;
+            _taskDescriptionView.TaskHeader.Text = _mainWindow.ListTaskController[index].TaskHeader;
+            _taskDescriptionView.TaskDescription.Text = _mainWindow.ListTaskController[index].Description;
+            _taskDescriptionView.TaskDescription.TextChanged += TaskDescription_TextChanged;
+            _taskDescriptionView.Show();
+
+        }
+
+        private void TaskDescription_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            _mainWindow.ListTaskController[currentIndex].Description = _taskDescriptionView.TaskDescription.Text;
         }
     }
 }

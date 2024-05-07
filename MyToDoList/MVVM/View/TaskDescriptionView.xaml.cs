@@ -19,6 +19,7 @@ namespace MyToDoList.MVVM.View
     /// </summary>
     public partial class TaskDescriptionView : Window
     {
+       
         public TaskDescriptionView()
         {
             InitializeComponent();
