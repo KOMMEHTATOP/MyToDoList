@@ -52,7 +52,7 @@ namespace MyToDoList.MVVM.ViewModel
 
                 CheckBox checkBox = new CheckBox();
                 checkBox.IsChecked = false;
-                checkBox.Checked += (sender, e) => { MessageBox.Show("ASDF"); };
+                checkBox.Checked += (sender, e) => { _mainWindow.favoriteCollection.BDCollectionModel.Add(_newTask); MessageBox.Show("Элемент добавлен"); };
                 taskItem.Children.Add(checkBox);
 
                 TextBlock taskText = new TextBlock();

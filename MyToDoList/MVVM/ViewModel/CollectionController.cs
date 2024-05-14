@@ -13,7 +13,7 @@ namespace MyToDoList.MVVM.View
         private string _headerListCollection;
         private CollectionModel _collectionModel;
         private ObservableCollection<TaskModel> _bDCollectionController = new ObservableCollection<TaskModel>();
-        private ObservableCollection<TaskModel> _favoriteCollectionController = new ObservableCollection<TaskModel>();
+
         public string HeaderListCollection
         {
             get { return _headerListCollection; }

@@ -13,6 +13,7 @@ namespace MyToDoList.MVVM.View
         public CollectionController CollectionController;
         public TaskController TaskController;
         public List<TaskModel> ListTaskModels = new List<TaskModel>();
+        public CollectionModel favoriteCollection;
 
         public MainWindow()
         {
@@ -23,7 +24,7 @@ namespace MyToDoList.MVVM.View
 
         public void Loading()
         {
-            CollectionModel favoriteCollection = new CollectionModel();
+            favoriteCollection = new CollectionModel();
             favoriteCollection.HeaderCollection = "Favorite";
             HeaderCollection.Items.Add(favoriteCollection.HeaderCollection);
 
