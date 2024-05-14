@@ -19,6 +19,7 @@ namespace MyToDoList.MVVM.ViewModel
         TaskDescriptionView _taskDescriptionView;
         int currentIndex;
 
+
         private string _taskHeaderContoller;
 
         public string TaskHeaderController
@@ -45,10 +46,24 @@ namespace MyToDoList.MVVM.ViewModel
             {
                 _newTask = new TaskModel(_mainWindow.InputTaskHeader.Text);
                 _mainWindow.ListTaskModels.Add(_newTask);
-                _mainWindow.TaskListView.Items.Add(_newTask.TaskHeader);
+
+                StackPanel taskItem = new StackPanel();
+                taskItem.Orientation = Orientation.Horizontal;
+
+                CheckBox checkBox = new CheckBox();
+                checkBox.IsChecked = false;
+                checkBox.Checked += (sender, e) => { MessageBox.Show("ASDF"); };
+                taskItem.Children.Add(checkBox);
+
+                TextBlock taskText = new TextBlock();
+                taskText.Text = _newTask.TaskHeader;
+                taskItem.Children.Add(taskText);
+
+                _mainWindow.TaskListView.Items.Add(taskItem);
             }
         }
 
+       
         public void ShowFullDescription(int index)
         {
             _taskDescriptionView = new TaskDescriptionView();
@@ -56,6 +71,7 @@ namespace MyToDoList.MVVM.ViewModel
             _taskDescriptionView.TaskHeader.Text = _mainWindow.ListTaskModels[index].TaskHeader;
             _taskDescriptionView.TaskDescription.Text = _mainWindow.ListTaskModels[index].Description;
             _taskDescriptionView.TaskDescription.TextChanged += TaskDescription_TextChanged;
+
             _taskDescriptionView.Show();
 
         }

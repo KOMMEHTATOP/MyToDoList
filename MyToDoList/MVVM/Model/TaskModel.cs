@@ -1,6 +1,7 @@
 ﻿
 using MyToDoList.MVVM.View;
 using System.ComponentModel;
+using System.Windows.Controls;
 
 namespace MyToDoList.MVVM.Model
 {
@@ -8,7 +9,6 @@ namespace MyToDoList.MVVM.Model
     {
         private string _taskHeader;
         private string _description = "";
-
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
