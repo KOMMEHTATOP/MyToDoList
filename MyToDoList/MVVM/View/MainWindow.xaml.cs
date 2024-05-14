@@ -23,6 +23,10 @@ namespace MyToDoList.MVVM.View
 
         public void Loading()
         {
+            CollectionModel favoriteCollection = new CollectionModel();
+            favoriteCollection.HeaderCollection = "Favorite";
+            HeaderCollection.Items.Add(favoriteCollection.HeaderCollection);
+
             AddGroupButton.Click += AddGroupButton_Click;
             AddCollectionButton.Click += AddCollectionButton_Click;
             AddTaskButton.Click += AddTaskButton_Click;

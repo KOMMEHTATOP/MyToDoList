@@ -9,7 +9,6 @@ namespace MyToDoList.MVVM.Model
 {
     public class CollectionModel: INotifyPropertyChanged
     {
-        CollectionController _collectionController;
         private ObservableCollection<TaskModel> _bDCollectionModel = new ObservableCollection<TaskModel>();
         private string _headerCollection = "Название листа";
 
@@ -39,9 +38,9 @@ namespace MyToDoList.MVVM.Model
             }
         }
 
-        public CollectionModel(CollectionController collectionController)
+        public CollectionModel()
         {
-            _collectionController = collectionController;
+            
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

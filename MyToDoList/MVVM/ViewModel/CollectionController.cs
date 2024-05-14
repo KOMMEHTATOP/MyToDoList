@@ -45,13 +45,14 @@ namespace MyToDoList.MVVM.View
         public CollectionController(MainWindow mainWindow)
         {
             _mainWindow = mainWindow;
-            
+
             AddListTasks();
         }
 
         private void AddListTasks()
         {
-            _collectionModel = new CollectionModel(this);
+            _collectionModel = new CollectionModel();
+
             _mainWindow.HeaderCollection.Items.Add(_collectionModel.HeaderCollection);
         }
 
