@@ -1,4 +1,5 @@
 ﻿using MyToDoList.MVVM.View;
+using System.ComponentModel;
 using MyToDoList.MVVM.ViewModel;
 using System.Windows;
 using System.Windows.Controls.Primitives;
@@ -25,14 +26,45 @@ namespace MyToDoList.MVVM.View
         public void Loading()
         {
             favoriteCollection = new CollectionModel();
+            favoriteCollection.PropertyChanged += FavoriteCollection_PropertyChanged;
             favoriteCollection.HeaderCollection = "Favorite";
-            HeaderCollection.Items.Add(favoriteCollection.HeaderCollection);
 
             AddGroupButton.Click += AddGroupButton_Click;
             AddCollectionButton.Click += AddCollectionButton_Click;
             AddTaskButton.Click += AddTaskButton_Click;
 
             TaskListView.SelectionChanged += TaskListView_SelectionChanged;
+            HeaderCollection.SelectionChanged += HeaderCollection_SelectionChanged;
+
+            HeaderCollection.MouseRightButtonDown += HeaderCollection_MouseRightButtonDown;
+
+        }
+
+        private void HeaderCollection_MouseRightButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var listBoxItem = sender as ListBoxItem;
+            if (listBoxItem != null && listBoxItem.DataContext != null)
+            {
+                string taskName = listBoxItem.DataContext.ToString();
+                //OpenEditTaskName(taskName);
+            }
+        }
+
+        private void FavoriteCollection_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(CollectionModel.HeaderCollection))
+            {
+                var collection = sender as CollectionModel;
+                if (collection != null)
+                {
+                    HeaderCollection.Items.Add(collection.HeaderCollection);
+                }
+            }
+        }
+
+        private void HeaderCollection_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
 
         private void TaskListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
